@@ -2,7 +2,8 @@ import axios from 'axios';
 import type { Task, TaskFormValues } from '../types/task';
 
 
-const BASE_URL = 'http://localhost:4000';
+// Use local URL for dev, and relative /api for production on Vercel
+const BASE_URL = import.meta.env.DEV ? 'http://localhost:4000' : '';
 
 const api = axios.create({ baseURL: BASE_URL });
 
