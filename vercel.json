@@ -1,23 +1,22 @@
 {
-  "builds": [
-    {
-      "src": "api/index.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+  "functions": {
+    "api/index.cjs": {
+      "memory": 128,
+      "maxDuration": 10
     }
-  ],
+  },
   "rewrites": [
     {
-      "source": "/api/:match*",
-      "destination": "api/index.js"
+      "source": "/tasks/(.*)",
+      "destination": "/api/index.cjs"
     },
     {
-      "source": "/tasks/:match*",
-      "destination": "api/index.js"
+      "source": "/tasks",
+      "destination": "/api/index.cjs"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.cjs"
     },
     {
       "source": "/(.*)",
